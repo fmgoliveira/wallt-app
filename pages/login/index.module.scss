@@ -18,3 +18,42 @@
     color: var(--clr-secondary);
   }
 }
+
+.icon {
+  margin-top: 35px;
+  font-size: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--clr-main);
+  }
+  &.s {
+    color: var(--clr-success);
+  }
+  &.e {
+    color: var(--clr-danger);
+  }
+}
+
+.success, .error, .p, .loading {
+  font-size: 14px;
+  margin-top: 15px;
+  transition: all .3s ease-in-out;
+  text-align: center;
+}
+
+.success {
+  color: var(--clr-success);
+}
+
+.error {
+  color: var(--clr-danger);
+}
+
+.loading {
+  color: var(--clr-main);
+}

@@ -9,16 +9,16 @@ import styles from './index.module.scss'
 export default function Login() {
   const router = useRouter();
   const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { setLoggedIn } = useAuth();
-  const [clicks1, setClicks1] = useState(0);
-  const [clicks2, setClicks2] = useState(0);
-  const [clicks3, setClicks3] = useState(0);
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
 
-    const res = await login(router, setLoggedIn!);
+    const res = await login(router, setLoggedIn!, setLoading);
     if (!res) setError(true);
+    else setSuccess(true);
   }
 
   const handleSignup = async (e: any) => {
@@ -26,9 +26,10 @@ export default function Login() {
 
     const res = await register(router, setLoggedIn!);
     if (!res) setError(true);
+    else setSuccess(true);
   }
 
-  useEffect(() => { login(router, setLoggedIn!) }, [router, setLoggedIn]);
+  useEffect(() => { login(router, setLoggedIn!, setLoading) }, [router, setLoggedIn]);
 
   return (
     <div className={styles.container}>
@@ -37,8 +38,18 @@ export default function Login() {
       </Head>
 
       <main className={styles.main}>
-        <Image src='/images/icons/icon-192x192.png' alt='' width={128} height={128} className={styles.img} onClick={e => handleSignup(e)}/>
+        <Image src='/images/icons/icon-192x192.png' alt='' width={128} height={128} className={styles.img} />
         <h1 className={styles.title}>Wa<span>ll</span>t</h1>
+
+        <div>
+          <span className={"ms-icon " + styles.icon + " " + (success ? styles.s : error ? styles.e : null)} onClick={e => loading ? null : handleLogin(e)}>{loading ? 'hourglass_empty' : 'fingerprint'}</span>
+          {
+            success ? <p className={styles.success}>Logged in</p> :
+              error ? <p className={styles.error}>Error logging in. Please try again by clicking the icon</p> :
+                loading ? <p className={styles.loading}>Waiting for email login...</p> :
+                <p className={styles.p}>Click the icon to login</p>
+          }
+        </div>
       </main>
     </div>
   )
