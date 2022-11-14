@@ -10,7 +10,7 @@ export default function Login() {
   const router = useRouter();
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState('');
   const { setLoggedIn } = useAuth();
 
   const handleLogin = async (e: any) => {
@@ -45,9 +45,9 @@ export default function Login() {
           <span className={"ms-icon " + styles.icon + " " + (success ? styles.s : error ? styles.e : null)} onClick={e => loading ? null : handleLogin(e)}>{loading ? 'hourglass_empty' : 'fingerprint'}</span>
           {
             success ? <p className={styles.success}>Logged in</p> :
-              error ? <p className={styles.error}>Error logging in. Please try again by clicking the icon</p> :
-                loading ? <p className={styles.loading}>Waiting for login...</p> :
-                <p className={styles.p}>Click the icon to login</p>
+              loading ? <p className={styles.loading}>{loading}</p> :
+                error ? <p className={styles.error}>Error logging in. Please try again by clicking the icon</p> :
+                  <p className={styles.p}>Click the icon to login</p>
           }
         </div>
       </main>
