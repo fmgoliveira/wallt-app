@@ -46,7 +46,7 @@ export default function Login() {
           {
             success ? <p className={styles.success}>Logged in</p> :
               error ? <p className={styles.error}>Error logging in. Please try again by clicking the icon</p> :
-                loading ? <p className={styles.loading}>Waiting for email login...</p> :
+                loading ? <p className={styles.loading}>Waiting for login...</p> :
                 <p className={styles.p}>Click the icon to login</p>
           }
         </div>
