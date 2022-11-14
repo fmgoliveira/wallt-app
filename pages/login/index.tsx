@@ -16,7 +16,7 @@ export default function Login() {
   const handleLogin = async (e: any) => {
     e.preventDefault();
 
-    const res = await login(router, setLoggedIn!, setLoading);
+    const res = await login(router, setLoggedIn!, setLoading, true);
     if (!res) setError(true);
     else setSuccess(true);
   }
